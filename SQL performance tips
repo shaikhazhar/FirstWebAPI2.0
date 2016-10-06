@@ -1,0 +1,30 @@
+Performance tips of Sql queries
+
+1.	Use EXISTS instead of IN to check existence of data.
+2.	Avoid * in SELECT statement. Give the name of columns which you require.
+3.	Choose appropriate Data Type. E.g. To store strings use varchar in place of text data type. Use text data type, whenever you need to store large data (more than 8000 characters).
+4.	Avoid nchar and nvarchar if possible since both the data types takes just double memory as char and varchar.
+5.	Avoid NULL in fixed-length field. In case of requirement of NULL, use variable-length (varchar) field that takes less space for NULL.
+6.	Avoid Having Clause. Having clause is required if you further wish to filter the result of an aggregations.
+7.	Create Clustered and Non-Clustered Indexes.
+8.	Keep clustered index small since the fields used in clustered index may also used in non-clustered index.
+9.	Most selective columns should be placed leftmost in the key of a non-clustered index.
+10.	Drop unused Indexes.
+11.	Better to create indexes on columns that have integer values instead of characters. Integer values use less overhead than character values.
+12.	Use joins instead of sub-queries.
+13.	Use WHERE expressions to limit the size of result tables that are created with joins.
+14.	Use TABLOCKX while inserting into a table and TABLOCK while merging.
+Big difference, TABLOCK will try to grab "shared" locks, and TABLOCKX exclusive locks.
+
+15.	Use WITH (NOLOCK) while querying the data from any table.
+16.	Use SET NOCOUNT ON and use TRY- CATCH to avoid deadlock condition.
+17.	Use Inner join as first preference at the time of joining tables, later use Left/Right join to avoid the unnecessary result data.
+18.	Avoid Cursors since cursor are very slow in performance.
+19.	Use Table variable in place of Temp table deals with smal amount of data. Use Temp tables required when the expectation of result data is large.
+20.	Use UNION ALL in place of UNION if possible.
+21.	Use Schema name before SQL objects name.
+22.	Use Stored Procedure for frequently used data and more complex queries.
+23.	Keep transaction as small as possible since transaction lock the processing tables data and may results into deadlocks.
+24.	Avoid prefix “sp_” with user defined stored procedure name because SQL server first search the user defined procedure in the master database and after that in the current session database.
+25.	Avoid use of Non-correlated Scalar Sub Query. Use this query as a separate query instead of part of the main query and store the output in a variable, which can be referred to in the main query or later part of the batch.
+26.	Avoid Multi-statement Table Valued Functions (TVFs). Multi-statement TVFs are more costly than inline TVFs.
